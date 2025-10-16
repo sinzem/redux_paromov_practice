@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { usersSlice, type UserId } from "./users.slice";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { useEffect } from "react";
-import { fetchUser } from "./model/fetch-user";
+// import { useEffect } from "react";
+// import { fetchUser } from "./model/fetch-user";
 import { deleteUser } from "./model/delete-user";
 
 export function UserInfo() {
@@ -12,16 +12,19 @@ export function UserInfo() {
     const isPending = useAppSelector(
         usersSlice.selectors.selectIsFetchUserPending
     );
+    const isDeletePending = useAppSelector(
+        usersSlice.selectors.selectIsDeleteUserPending
+    );
     const user = useAppSelector(state => 
         usersSlice.selectors.selectUserById(state, id)
     );
 
-    useEffect(() => {
-        dispatch(fetchUser(id));
-    }, [dispatch, id]);
+    // useEffect(() => {
+    //     dispatch(fetchUser(id)); /* (запрос на получение данных для state перенесли в router) */
+    // }, [dispatch, id]);
 
     const handleBackButtonClick = () => {
-        navigate("..", {relative: "path"}); /* (навигация на .. назад) */
+        navigate("..", {relative: "path"}); /* (навигация на предыдущий уровень) */
     };
 
     const handleDeleteButtonClick = () => {
@@ -44,6 +47,7 @@ export function UserInfo() {
             <button
                 onClick={handleDeleteButtonClick}
                 className="btn bg-red-500"
+                disabled={isDeletePending}
             >
                 Delete
             </button>

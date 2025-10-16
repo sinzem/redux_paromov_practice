@@ -1,10 +1,10 @@
 import { createBrowserRouter, Outlet, Link, redirect } from "react-router-dom";
-import { UsersList } from "./modules/users/users-list";
-import { Counter } from "./modules/counters/counters";
-import { UserInfo } from "./modules/users/user-info";
-import { fetchUsers } from "./modules/users/model/fetch-users";
+import { UsersList } from "../modules/users/users-list";
+import { Counter } from "../modules/counters/counters";
+import { UserInfo } from "../modules/users/user-info";
+import { fetchUsers } from "../modules/users/model/fetch-users";
 import { store } from "./store";
-import { fetchUser } from "./modules/users/model/fetch-user";
+import { fetchUser } from "../modules/users/model/fetch-user";
 
 const loadStore = () => new Promise((resolve) => {
     setTimeout(() => resolve(store), 0);
@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
                 path: "users",
                 element: <UsersList />,
                 loader: () => {
-                    loadStore().then(() => store.dispatch(fetchUsers())); /* (делаем запрос во время перехода) */ 
+                    loadStore().then(() => store.dispatch(fetchUsers())); 
                     return null;
                 }
             },

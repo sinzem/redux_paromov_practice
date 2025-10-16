@@ -1,5 +1,5 @@
-import { Counter } from './modules/counters/counters';
-import { UsersList } from './modules/users/users-list';
+import { Counter } from '../modules/counters/counters';
+import { UsersList } from '../modules/users/users-list';
 
 export default function App() {
   return (

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "../../store";
+import { useAppSelector } from "../../app/store";
 import { decrementAction, incrementAction, selectCounter, type CounterId } from "./counters.slice";
 
 export function Counter({counterId}: {counterId: CounterId}) {
