@@ -20,10 +20,10 @@ export const createAppAsyncThunk = createAsyncThunk.withTypes<{
     state: AppState;
     dispatch: AppDispatch;
     extra: typeof extraArgument;
-}>(); 
+}>(); /* (добавляем типизацию для createAsyncThunk - по документации этот обьект содержит еще несколько полей, но зачастую этих достаточно) */
 
 export type ExtraArgument = typeof extraArgument;
 
 export const createSlice = buildCreateSlice({
-    creators: {asyncThunk: asyncThunkCreator} 
+    creators: {asyncThunk: asyncThunkCreator} /* (устанавливаем дополнение к createSlice, заменяем встроенный на этот) */
 })

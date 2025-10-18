@@ -92,7 +92,8 @@ export const usersSlice = createSlice({
             state.fetchUserStatus = "failed";
         },
     },
-    extraReducers: (builder) => {
+    extraReducers: (builder) => { /* (для работы с внешними thunkами) */
+        /* (описываем кейсы для thunka, по сути каждый должен иметь три состояния - pending/success/failed, по сравнению с обычными кейсами для редьюсера не короче, зато сам thunk(fetchUsers) значительно меньше) */
         builder.addCase(fetchUsers.pending, (state) => {
             state.fetchUsersStatus = "pending";
         });

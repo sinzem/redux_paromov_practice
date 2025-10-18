@@ -22,7 +22,7 @@ export const fetchUsers = createAppAsyncThunk(
         return thunkAPI.extra.api.getUsers();
     }, /* (запрос) */
     {  /* (необязательный обьект с опциями) */
-        condition(params, {getState}) {
+        condition(params, {getState}) { /* (condition - условие для отработки запроса, должно вернуть true\false) */
             const isIdle = usersSlice.selectors.selectIsFetchUsersIdle(getState());
 
             if (!params?.refetch && !isIdle) return false;

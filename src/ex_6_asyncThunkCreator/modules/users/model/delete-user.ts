@@ -2,6 +2,7 @@
 // import { usersSlice, type UserId } from "../users.slice";
 // import { fetchUsers } from "./fetch-users";
 
+/* (при работе с asyncThunkCreator этот функционал прописывается прямо в слайсе в редьюсерах) */
 // export const deleteUser = (userId: UserId): AppThunk<Promise<void>> => 
 //     async (dispatch, _, {api, router}) => { /* (передаем роутер - при удалении пользователя нужно редиректнуть на userslist) */
 //     dispatch(usersSlice.actions.deleteUserPending());
@@ -11,6 +12,6 @@
 //         await dispatch(fetchUsers({refetch: true}));
 //         dispatch(usersSlice.actions.deleteUserSuccess({userId}));
 //     } catch {
-//         dispatch(usersSlice.actions.deleteUserFailed())
+//         dispatch(usersSlice.actions.fetchUserFailed())
 //     }
 // }
