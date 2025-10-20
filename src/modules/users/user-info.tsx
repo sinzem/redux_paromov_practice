@@ -24,18 +24,19 @@ export function UserInfo() {
     /* (получаем из rtk данные пользователя и состояние запроса) */
     const {data: user, isLoading: isLoadingUser} = usersApi.useGetUserQuery(id ?? skipToken); /* (на случай отсутствия id передаем skipToken - запрос будет проигнорирован) */
 
-    /* (при работе с мутациями получаем массив, где первой будет функция мутации, а вторым - обьект состояния) */
+    /* (при работе с мутациями получаем массив, где первой будет функция вызова мутации(навешиваем на кнопку), а вторым - обьект состояния) */
     const [deleteUser, {isLoading: isLoadingDelete}] = usersApi.useDeleteUserMutation();
 
     const handleBackButtonClick = () => {
         navigate("..", {relative: "path"}); 
     };
 
-    const handleDeleteButtonClick = () => {
+    const handleDeleteButtonClick = async () => {
         // dispatch(/usersSlice.actions.deleteUser({userId: id}))
         //     .then(() => navigate("..", {relative: "path"}));
         if (!id) return;
-        deleteUser(id);
+        await deleteUser(id);
+        navigate("..", {relative: "path"});
      }
 
     if (/* isPending */ isLoadingUser || !user) return <div>Loading...</div>;
