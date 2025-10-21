@@ -1,3 +1,7 @@
+// import { createSelector/* , type PayloadAction  */} from "@reduxjs/toolkit";
+// // import { fetchUsers } from "./model/fetch-users";
+// import { createSlice, /* type ExtraArgument  */} from "../../shared/redux";
+
 export type UserId = string;
 
 export type User = {

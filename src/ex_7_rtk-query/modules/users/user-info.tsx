@@ -2,19 +2,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import { type UserId } from "./users.slice";
 import { usersApi } from "./api";
 import { skipToken } from "@reduxjs/toolkit/query";
-import { useAppDispatch, useAppSelector } from "../../shared/redux";
-import { deleteUser } from "./model/delete-user";
 
 export function UserInfo() {
-    const dispatch = useAppDispatch();
+
     const navigate = useNavigate();
     const {id} = useParams<{id: UserId}>();
 
-    const {data: user, isLoading: isLoadingUser} = usersApi.useGetUserQuery(id ?? skipToken); 
+    /* (получаем из rtk данные пользователя и состояние запроса) */
+    const {data: user, isLoading: isLoadingUser} = usersApi.useGetUserQuery(id ?? skipToken); /* (на случай отсутствия id передаем skipToken - запрос будет проигнорирован) */
 
-    const isLoadingDelete = useAppSelector((state) =>         
-        usersApi.endpoints.deleteUser.select(id ?? skipToken)(state).isLoading
-    );
+    /* (при работе с мутациями получаем массив, где первой будет функция вызова мутации(навешиваем на кнопку), а вторым - обьект состояния) */
+    const [deleteUser, {isLoading: isLoadingDelete}] = usersApi.useDeleteUserMutation();
 
     const handleBackButtonClick = () => {
         navigate("..", {relative: "path"}); 
@@ -22,8 +20,8 @@ export function UserInfo() {
 
     const handleDeleteButtonClick = async () => {
         if (!id) return;
- 
-        await dispatch(deleteUser(id)); 
+        await deleteUser(id);
+        navigate("..", {relative: "path"});
      }
 
     if (isLoadingUser || !user) return <div>Loading...</div>;

@@ -10,7 +10,7 @@ export const router = createBrowserRouter([
         path: "/",
         element: (
             <div className="container p-5 flex flex-col gap-5">
-                <header className="py-5 flex gap-4 mx-auto my-5">
+                <header className="py-5 flex gap-4">
                     <Link to="users">Users</Link>
                     <Link to="counters">Counters</Link>
                 </header>
@@ -26,7 +26,9 @@ export const router = createBrowserRouter([
                 path: "users",
                 element: <UsersList />,
                 loader: async () => {
-                    store.dispatch(usersApi.util.prefetch("getUsers", undefined, {}));  
+                    // usersApi.endpoints.getUsers.select()(store.getState()); /* (можем вызывать Api из роутера, например в д.с вызываем и получаем состояние, но так делать не рекомендуется - стараемся не использовать select для get - будет постоянно перерисовывать, при мутации - нет) */ 
+                    // const result = await store.dispatch(usersApi.endpoints.getUsers.initiate()).unwrap(); /* (инициализируем данные - если они есть - вернет их, если нет - выполнит запрос, если нужны эти данные, получаем их таким образом, а не так как в примере выше) */
+                    store.dispatch(usersApi.util.prefetch("getUsers", undefined, {})); /* (для предзапроса лучше использовать prefetch(в любом месте приложения), передаем в него метод, обьект с аргументами(undefined в д.с) и обьект с настройками, например force-запрос, или использовать предыдущие данные, в д.с оставляем по умолчанию) */ 
                     return null;
                 }
             },

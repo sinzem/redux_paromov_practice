@@ -8,7 +8,7 @@ export function Counter({counterId}: {counterId: CounterId}) {
   const counterState = useAppSelector((state) => selectCounter(state, counterId)); 
 
   return (
-    <div className='flex gap-5 items-center justify-center'>
+    <div className='flex gap-5 items-center'>
         Counter {counterState?.counter || 0} 
         <button
           className='btn'

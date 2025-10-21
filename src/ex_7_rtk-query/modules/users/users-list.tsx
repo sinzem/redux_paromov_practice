@@ -6,7 +6,8 @@ import { usersApi } from "./api";
 export function UsersList() {
     const [sortType, setSortType] = useState<"asc" | "desc">("asc");
 
-    const { data: users, isLoading } = usersApi.useGetUsersQuery(); 
+    const { data: users, isLoading } = usersApi.useGetUsersQuery(); /* (получаем данные и состояние запроса из rtk query) */
+
 
     const sortedUsers = useMemo(() => {
         return [...(users ?? [])].sort((a, b) => {

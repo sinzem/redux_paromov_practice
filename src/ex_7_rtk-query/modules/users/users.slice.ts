@@ -1,3 +1,7 @@
+// import { createSelector/* , type PayloadAction  */} from "@reduxjs/toolkit";
+// import { fetchUsers } from "./model/fetch-users";
+// import { createSlice, /* type ExtraArgument  */} from "../../shared/redux";
+
 export type UserId = string;
 
 export type User = {
@@ -6,7 +10,6 @@ export type User = {
     description: string;
 }
 
-/* (при работе с rtk query логику переносим в createApi/usersApi) */
 // export type UsersState = {
 //     entities: Record<UserId, User | undefined>;
 //     ids: UserId[];
